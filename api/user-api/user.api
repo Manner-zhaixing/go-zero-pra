@@ -9,7 +9,7 @@ type userResp {
 	Name   string `json:"userName"`
 }
 
-service Foo {
+service user {
 	// 定义 path 参数
 	@handler userInfo
 	post /api/userInfo/:id (userReq) returns (userResp)
