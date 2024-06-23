@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	cs "github.com/zeromicro/go-zero/core/service"
 
 	"go-zero-pra/application/user/rpc/internal/config"
 	"go-zero-pra/application/user/rpc/internal/server"
@@ -10,7 +11,6 @@ import (
 	"go-zero-pra/application/user/rpc/service"
 
 	"github.com/zeromicro/go-zero/core/conf"
-	"github.com/zeromicro/go-zero/core/service"
 	"github.com/zeromicro/go-zero/zrpc"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -28,7 +28,7 @@ func main() {
 	s := zrpc.MustNewServer(c.RpcServerConf, func(grpcServer *grpc.Server) {
 		service.RegisterUserServer(grpcServer, server.NewUserServer(ctx))
 
-		if c.Mode == service.DevMode || c.Mode == service.TestMode {
+		if c.Mode == cs.DevMode || c.Mode == cs.TestMode {
 			reflection.Register(grpcServer)
 		}
 	})
